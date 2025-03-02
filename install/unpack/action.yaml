@@ -3,7 +3,7 @@
 
 name: setup unpack
 author: carabiner-dev
-description: 'Installs the unpack dependency analyzer to the runner environment'
+description: 'Installs the Carabiner unpack dependency analyzer to the runner environment'
 branding:
   icon: 'download-cloud'
   color: 'green'
@@ -35,6 +35,8 @@ runs:
         run: |
           mkdir -p ${{ inputs.install-dir }}/bin || :
           cd .build/unpack && go build -o ${{ inputs.install-dir }}/bin/unpack .
+          cd - 
+          rm -rf .build/unpack
 
       - if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
         run: echo "${{ inputs.install-dir }}/bin" >> $GITHUB_PATH
